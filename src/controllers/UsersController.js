@@ -1,3 +1,5 @@
+const AppError = require("../utils/AppError");
+
 /*
 No max um controler pode ter 5 metodos
 
@@ -10,9 +12,13 @@ No max um controler pode ter 5 metodos
 
 class UsersController {
   create(request, response) {
-    const { name, email, password } = request.body;
+    const { name, email, password } = request.bodyy;
 
-    response.json({name, email, password});
+    if (!name) {
+      throw new AppError("Your name is obligatory!");
+    }
+
+    response.status(201).json({ name, email, password });
   }
 }
 
