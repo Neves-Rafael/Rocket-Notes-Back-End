@@ -36,7 +36,7 @@
 <h2 align="center">🧱 Pré-requisitos</h2>
 <br/>
 
-<p align="center">Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas: <a href="https://git-scm.com">Git</a> <br/>
+<p align="center">Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas: <a href="https://git-scm.com">Git</a>, insomnia, Beekeeper <br/>
 Além disto é bom ter um editor para trabalhar com o código como <a href="https://code.visualstudio.com/">VSCode</a></p>
 <br/>
 <br/>
@@ -48,8 +48,8 @@ Além disto é bom ter um editor para trabalhar com o código como <a href="http
 ```bash
 # Clone este repositório
 $ git clone https://github.com/Neves-Rafael/Focus-timer
-$ npm install lite-server
-$ configure o package.json para utilizar o lite-server
+$ npm install knex / express / bcrypt /sqLite / express-async-errors /nodemon
+$ configure o package.json para utilizar o nodemon e o knex para iniciar a migrate
 
 # Execute em qualquer navegador
 ```
@@ -62,9 +62,9 @@ $ configure o package.json para utilizar o lite-server
 
 <p align="center">As seguintes ferramentas foram usadas na construção do projeto:<br/>
 <br/>  
-JavaScript - CSS - HTML
+JavaScript - Node.js
 <br/>
-Pexels (Api) - Lite-server
+Insomnia - BeeKeeper - Sqlite3
 <br/>
 <br/>
 
