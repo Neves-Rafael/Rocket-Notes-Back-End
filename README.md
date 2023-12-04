@@ -51,7 +51,6 @@ $ git clone https://github.com/Neves-Rafael/Focus-timer
 $ npm install knex / express / bcrypt /sqLite / express-async-errors /nodemon
 $ configure o package.json para utilizar o nodemon e o knex para iniciar a migrate
 
-# Execute em qualquer navegador
 ```
 </p>
 <br/>
