@@ -48,7 +48,7 @@ Além disto é bom ter um editor para trabalhar com o código como <a href="http
 ```bash
 # Clone este repositório
 $ git clone https://github.com/Neves-Rafael/Focus-timer
-$ npm install knex / express / bcrypt /sqLite / express-async-errors /nodemon
+$ npm install 
 $ configure o package.json para utilizar o nodemon e o knex para iniciar a migrate
 
 ```
