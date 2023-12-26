@@ -10,7 +10,8 @@
 <p align="center">Utilizando Node.Js com o insomnia, beekeeper, SQLite3 e dependências como Express, Knex e Bcryptjs desenvolvi um Back-End com as funcionalidades CRUD. Tendo autenticações para verificação de usuários já existente e atualização dos dados.</p>
 <br/>
 
-
+<p align="center">Projeto desenvolvido durante o curso <strong>Explorer</strong> oferecida pela <a href="https://app.rocketseat.com.br/">RocketSeat</a>.<br/>
+<br/>
 
 
 <h1 align="center">⚙️Funcionalidades</h1>
