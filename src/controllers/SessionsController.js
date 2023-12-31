@@ -18,6 +18,8 @@ class SessionController{
             throw new AppError("E-mail ou senha incorretos", 401);
         }
 
+
+        
         return response.json(user);
     }
 }
