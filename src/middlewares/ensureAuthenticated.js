@@ -2,25 +2,26 @@ const { verify } = require("jsonwebtoken");
 const AppError = require("../utils/AppError");
 const authConfig = require("../configs/auth");
 
-function ensureAuthenticated(request, response, next){
-    const authHeader = request.headers.authorization;
-    if(!authHeader){
-        throw new AppError("Não foi possível autenticar", 401);
-    }
+function ensureAuthenticated(request, response, next) {
+  const authHeader = request.headers.authorization;
 
-    const [, token] = authHeader.split(" ");
+  if (!authHeader) {
+    throw new AppError("Não foi possível autenticar", 401);
+  }
 
-    try{
-        const {sub: user_id} = verify(token, authConfig.jwt.secret);
+  const [, token] = authHeader.split(" ");
 
-        request.user = {
-            id: Number(user_id)
-        }
+  try {
+    const { sub: user_id } = verify(token, authConfig.jwt.secret);
 
-        return next();
-    }catch{
-        throw new AppError("Não foi possível autenticar", 401);
-    }
+    request.user = {
+      id: Number(user_id),
+    };
+
+    return next();
+  } catch {
+    throw new AppError("Não foi possível autenticar", 401);
+  }
 }
 
 module.exports = ensureAuthenticated;
