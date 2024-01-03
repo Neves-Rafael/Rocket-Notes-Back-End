@@ -6,7 +6,7 @@ function ensureAuthenticated(request, response, next) {
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
-    throw new AppError("Não foi possível autenticar", 401);
+    throw new AppError("it's not possible authenticate", 401);
   }
 
   const [, token] = authHeader.split(" ");
@@ -20,7 +20,7 @@ function ensureAuthenticated(request, response, next) {
 
     return next();
   } catch {
-    throw new AppError("Não foi possível autenticar", 401);
+    throw new AppError("it's not possible authenticate", 401);
   }
 }
 
