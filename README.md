@@ -1,4 +1,4 @@
-<h1 align="center">🌐 Aplicação Node</h1>
+<h1 align="center">🌐 Rocket Notes</h1>
 
 ![image](https://github.com/Neves-Rafael/node-aplication/assets/136202919/1d3aeb53-965c-4c66-b90c-403203a5226c)
 
