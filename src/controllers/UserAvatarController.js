@@ -12,7 +12,7 @@ class UserAvatarController{
         const user = await knex("users").where({id: user_id}).first();
 
         if(!user){
-            throw new AppError("Usuário não autenticado", 404);
+            throw new AppError("Unauthenticated user", 404);
         }
 
         if(user.avatar){
