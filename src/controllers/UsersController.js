@@ -2,11 +2,15 @@ const { hash, compare } = require("bcryptjs");
 const AppError = require("../utils/AppError");
 const sqliteConnection = require("../database/sqlite");
 
+const UserRepository = require("../repositories/UserRepository");
+
 class UsersController {
   async create(request, response) {
     const { name, email, password } = request.body;
 
+    const userRepository = new UserRepository();
 
+    const checkUserExists = await userRepository.findByEmail(email);
 
     if (checkUserExists) {
       throw new AppError("This email is already in use");
@@ -14,10 +18,7 @@ class UsersController {
 
     const hashedPassword = await hash(password, 8);
 
-    await database.run(
-      "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
-      [name, email, hashedPassword]
-    );
+    await userRepository.create({ name, email, password: hashedPassword });
 
     return response.status(201).json();
   }
@@ -27,7 +28,9 @@ class UsersController {
     const user_id = request.user.id;
 
     const database = await sqliteConnection();
-    const user = await database.get("SELECT * FROM users WHERE id = (?)", [user_id]);
+    const user = await database.get("SELECT * FROM users WHERE id = (?)", [
+      user_id,
+    ]);
 
     if (!user) {
       throw new AppError("User not found!");
@@ -45,21 +48,24 @@ class UsersController {
     user.name = name ?? user.name;
     user.email = email ?? user.email;
 
-    if(password && !old_password){
-      throw new AppError("You need put a old Password For change a new Password!")
+    if (password && !old_password) {
+      throw new AppError(
+        "You need put a old Password For change a new Password!"
+      );
     }
 
-    if(password && old_password){
-      const checkOldPassword = await compare(old_password, user.password)
+    if (password && old_password) {
+      const checkOldPassword = await compare(old_password, user.password);
 
-      if(!checkOldPassword) {
-        throw new AppError("The old Password is not correct")
+      if (!checkOldPassword) {
+        throw new AppError("The old Password is not correct");
       }
 
       user.password = await hash(password, 8);
     }
 
-    await database.run(`
+    await database.run(
+      `
       UPDATE users SET
       name = ?,
       email = ?,
@@ -67,7 +73,7 @@ class UsersController {
       updated_at = DATETIME ('now')
       WHERE id = ?`,
       [user.name, user.email, user.password, user_id]
-      )
+    );
 
     return response.status(200).json();
   }
