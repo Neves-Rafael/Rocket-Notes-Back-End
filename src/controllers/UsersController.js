@@ -2,7 +2,7 @@ const { hash, compare } = require("bcryptjs");
 const AppError = require("../utils/AppError");
 const sqliteConnection = require("../database/sqlite");
 const UserRepository = require("../repositories/UserRepository");
-const UserCreateService = require("../service/UserCreateService");
+const UserCreateService = require("../services/UserCreateService");
 
 class UsersController {
   async create(request, response) {
@@ -10,7 +10,6 @@ class UsersController {
     const userRepository = new UserRepository();
     const userCreateService = new UserCreateService(userRepository);
     await userCreateService.execute({ name, email, password });
-
 
     return response.status(201).json();
   }
