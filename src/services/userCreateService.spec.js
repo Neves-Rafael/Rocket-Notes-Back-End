@@ -1,4 +1,5 @@
 const UserCreateService = require("./UserCreateService");
+const UserRepositoryInMemory = require("../repositories/UserRepositoryInMemory");
 
 it("user should be create", () => {
   const user = {
@@ -7,7 +8,8 @@ it("user should be create", () => {
     password: "123",
   };
 
-  const userCreateService = new UserCreateService();
+  const userRepositoryInMemory = new UserRepositoryInMemory();
+  const userCreateService = new UserCreateService(userRepositoryInMemory);
   const userCreated = userCreateService.execute(user);
 
   expect(userCreated).toHaveProperty("id");
