@@ -30,7 +30,6 @@ class UserRepository {
   }
 
   async update({ user, user_id }) {
-    console.log(user)
     const database = await sqliteConnection();
     const sendUpdate = await database.run(
       `
