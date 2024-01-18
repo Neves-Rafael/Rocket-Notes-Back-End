@@ -1,5 +1,7 @@
 const NotesRepository = require("../repositories/NotesRepository");
 const NoteCreateService = require("../services/notes/NoteCreateService");
+const NoteShowService = require("../services/notes/NoteShowService");
+const NoteDeleteService = require("../services/notes/NoteDeleteService");
 
 class NotesController {
   async create(request, response) {
@@ -21,13 +23,17 @@ class NotesController {
 
   async show(request, response) {
     const { id } = request.params;
-
-    return response.json({ ...note, tags, links });
+    const notesRepository = new NotesRepository();
+    const noteShowService = new NoteShowService(notesRepository);
+    const note = await noteShowService.execute(id);
+    return response.json(note);
   }
 
   async delete(request, response) {
     const { id } = request.params;
-
+    const notesRepository = new NotesRepository();
+    const noteDeleteService = new NoteDeleteService(notesRepository);
+    await noteDeleteService.execute(id);
     return response.json();
   }
 

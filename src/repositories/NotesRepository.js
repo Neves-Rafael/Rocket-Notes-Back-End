@@ -6,23 +6,14 @@ class notesRepository {
       description,
       user_id,
     });
-    await this.insertLinks(links, note_id);
-    await this.insertTags(tags, note_id, user_id);
-
-  }
-
-  async insertLinks(links, note_id) {
     const linksInsert = links.map((link) => {
       return {
         note_id,
         url: link,
       };
     });
-
     await knex("links").insert(linksInsert);
-  }
 
-  async insertTags(tags, note_id, user_id) {
     const tagsInsert = tags.map((name) => {
       return {
         note_id,
@@ -35,15 +26,21 @@ class notesRepository {
     return insetTags;
   }
 
-  async show() {
+  async show(id) {
     const note = await knex("notes").where({ id }).first();
     const tags = await knex("tags").where({ note_id: id }).orderBy("name");
     const links = await knex("links")
       .where({ note_id: id })
       .orderBy("created_at");
+
+      return ({
+        ...note,
+        tags,
+        links
+      })
   }
 
-  async delete() {
+  async delete(id) {
     await knex("notes").where({ id }).delete();
   }
 
