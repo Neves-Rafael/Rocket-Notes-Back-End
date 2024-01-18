@@ -1,32 +1,17 @@
-const knex = require("../database/knex");
-const AppError = require("../utils/AppError");
-const { compare } = require("bcryptjs");
-const authConfig = require("../configs/auth");
-const {  sign } = require("jsonwebtoken")
+const SessionsRepository = require("../repositories/SessionsRepository");
+const SessionCreateService = require("../services/sessions/SessionCreateService");
 
-class SessionController{
-    async create(request, response){
-        const {email, password} = request.body;
+class SessionController {
+  async create(request, response) {
+    const { email, password } = request.body;
+    const sessionsRepository = new SessionsRepository();
+    const sessionCreateService = new SessionCreateService(sessionsRepository);
+    const sessionResult = await sessionCreateService.execute({
+      email,
+      password,
+    });
 
-        const user = await knex("users").where({email}).first();
-
-        if(!user){
-            throw new AppError("Incorrect email or password", 401);
-        }
-
-        const passwordMatched = await compare(password, user.password);
-
-        if(!passwordMatched){
-            throw new AppError("Incorrect email or password", 401);
-        }
-
-        const { secret, expiresIn } = authConfig.jwt;
-        const token = sign({}, secret, {
-            subject: String(user.id),
-            expiresIn
-        })
-
-        return response.json({user, token});
-    }
+    return response.json(sessionResult);
+  }
 }
 module.exports = SessionController;

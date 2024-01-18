@@ -1,6 +1,6 @@
 const AppError = require("../utils/AppError");
 const UserRepository = require("../repositories/UserRepository");
-const UserAvatarService = require("../services/user/UserAvatarService");
+const UserAvatarService = require("../services/users/UserAvatarService");
 
 class UserAvatarController {
   async update(request, response) {
