@@ -1,15 +1,14 @@
 const TagsRepository = require("../repositories/TagsRepository");
-const TagsShowService = require("../services/tags/TagsShowService");
+const TagShowService = require("../services/tags/TagShowService");
 
 class TagsController {
   async index(request, response) {
     const user_id = request.user.id;
 
     const tagsRepository = new TagsRepository();
-    const tagsService = new TagsShowService(tagsRepository);
+    const tagsService = new TagShowService(tagsRepository);
 
     const tagsShowService = await tagsService.execute(user_id);
-
 
     return response.json(tagsShowService);
   }

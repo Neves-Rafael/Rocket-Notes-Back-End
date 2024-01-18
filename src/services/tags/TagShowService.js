@@ -1,4 +1,4 @@
-class TagsShowService {
+class TagShowService {
   constructor(tagsRepository) {
     this.tagsRepository = tagsRepository;
   }
@@ -9,4 +9,4 @@ class TagsShowService {
   }
 }
 
-module.exports = TagsShowService;
+module.exports = TagShowService;
