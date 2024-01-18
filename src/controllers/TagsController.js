@@ -1,12 +1,17 @@
-const knex = require("../database/knex");
+const TagsRepository = require("../repositories/TagsRepository");
+const TagsShowService = require("../services/tags/TagsShowService");
 
 class TagsController {
   async index(request, response) {
     const user_id = request.user.id;
 
-    const tags = await knex("tags").where({ user_id }).groupBy("name");
+    const tagsRepository = new TagsRepository();
+    const tagsService = new TagsShowService(tagsRepository);
 
-    return response.json(tags);
+    const tagsShowService = await tagsService.execute(user_id);
+
+
+    return response.json(tagsShowService);
   }
 }
 

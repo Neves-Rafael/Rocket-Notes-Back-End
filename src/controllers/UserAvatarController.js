@@ -5,10 +5,10 @@ const UserAvatarService = require("../services/user/UserAvatarService");
 class UserAvatarController {
   async update(request, response) {
     const user_id = request.user.id;
-    let avatarFilename;
     const userRepository = new UserRepository();
     const userAvatarService = new UserAvatarService(userRepository);
 
+    let avatarFilename;
     //atenção verificar se está impedindo a atualização do perfil.
     if (!request.file) {
       throw new AppError("File not found");
