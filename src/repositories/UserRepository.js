@@ -48,13 +48,15 @@ class UserRepository {
   }
 
   async updateAvatar({user_id, user}){
-    const updateUserAVatar = await knex("users").update(user).where({id: user_id});
-    return updateUserAVatar;
+    const updateUserAvatar = await knex("users").update(user).where({id: user_id});
+    console.log(updateUserAvatar)
+    return updateUserAvatar;
   }
 
   async saveAvatar(avatarFilename) {
     const diskStorage = new DiskStorage();
     const avatar = await diskStorage.saveFile(avatarFilename);
+    console.log(avatarFilename)
     return avatar
   }
 
