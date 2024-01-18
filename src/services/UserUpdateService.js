@@ -1,0 +1,5 @@
+class UserUpdateService{
+    constructor(userRepository){
+        
+    }
+}
