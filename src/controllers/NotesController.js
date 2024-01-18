@@ -1,7 +1,9 @@
 const NotesRepository = require("../repositories/NotesRepository");
+
 const NoteCreateService = require("../services/notes/NoteCreateService");
 const NoteShowService = require("../services/notes/NoteShowService");
 const NoteDeleteService = require("../services/notes/NoteDeleteService");
+const NoteIndexService = require("../services/notes/NoteIndexService");
 
 class NotesController {
   async create(request, response) {
@@ -40,6 +42,12 @@ class NotesController {
   async index(request, response) {
     const { title, tags } = request.query;
     const user_id = request.user.id;
+
+    const notesRepository = new NotesRepository();
+    const noteIndexService = new NoteIndexService(notesRepository);
+    const notesWithTags = await noteIndexService.execute({
+      title, tags, user_id
+    })
 
     return response.json(notesWithTags);
   }

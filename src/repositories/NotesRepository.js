@@ -44,7 +44,7 @@ class notesRepository {
     await knex("notes").where({ id }).delete();
   }
 
-  async index() {
+  async index({ title, tags, user_id }) {
     let notes;
     if (tags) {
       const filterTags = tags.split(",").map((tag) => tag.trim());
@@ -72,6 +72,8 @@ class notesRepository {
         tags: notesTags,
       };
     });
+
+    return notesWithTags;
   }
 }
 
