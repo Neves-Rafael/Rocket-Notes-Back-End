@@ -21,9 +21,8 @@ class UsersController {
     // const userCreateService = new UserCreateService(userRepository);
     // await userCreateService.execute({ name, email, password });
 
- 
     const user = await userRepository.findById(user_id);
-
+ 
     if (!user) {
       throw new AppError("User not found!");
     }
@@ -31,7 +30,9 @@ class UsersController {
     //reaproveitar findByEmail
     const userWithUpdatedEmail = await userRepository.findByEmail(email);
 
-    if (userWithUpdatedEmail && userWithUpdatedEmail.id !== user.id) {
+
+
+    if (userWithUpdatedEmail &&userWithUpdatedEmail.id !== user.id) {
       throw new AppError("This E-mail already exist!");
     }
 
@@ -54,7 +55,8 @@ class UsersController {
       user.password = await hash(password, 8);
     }
 
-    userRepository.update({user});
+
+    userRepository.update( {user, user_id} );
 
     return response.status(200).json();
   }

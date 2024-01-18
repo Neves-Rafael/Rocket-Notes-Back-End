@@ -26,12 +26,13 @@ class UserRepository {
       user_id,
     ]);
 
-    return { user };
+    return user;
   }
 
-  async update(user) {
+  async update({ user, user_id }) {
+    console.log(user)
     const database = await sqliteConnection();
-    await database.run(
+    const sendUpdate = await database.run(
       `
       UPDATE users SET
       name = ?,
@@ -41,6 +42,8 @@ class UserRepository {
       WHERE id = ?`,
       [user.name, user.email, user.password, user_id]
     );
+
+    return sendUpdate;
   }
 }
 
