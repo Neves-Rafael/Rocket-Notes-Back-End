@@ -1,4 +1,6 @@
 const sqliteConnection = require("../database/sqlite");
+const knex = require("../database/knex");
+const DiskStorage = require("../providers/DiskStorage");
 
 class UserRepository {
   async findByEmail(email) {
@@ -43,6 +45,23 @@ class UserRepository {
     );
 
     return sendUpdate;
+  }
+
+  async updateAvatar({user_id, user}){
+    const updateUserAVatar = await knex("users").update(user).where({id: user_id});
+    return updateUserAVatar;
+  }
+
+  async saveAvatar(avatarFilename) {
+    const diskStorage = new DiskStorage();
+    const avatar = await diskStorage.saveFile(avatarFilename);
+    return avatar
+  }
+
+  async deleteAvatar(avatarFilename){
+    const diskStorage = new DiskStorage();
+    const avatar = await diskStorage.deleteFile(avatarFilename);
+    return avatar
   }
 }
 
