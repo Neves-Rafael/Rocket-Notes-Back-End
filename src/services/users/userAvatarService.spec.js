@@ -20,7 +20,6 @@ describe("userAvatarService", () => {
 
     const userCreate = await userRepositoryInMemory.create(user);
     const findUser = await userRepositoryInMemory.findById(userCreate.id);
-    console.log(findUser);
 
     await expect(
       userAvatarService.execute({ id: "dfdsfsfsdfsdfsd" })
@@ -39,10 +38,12 @@ describe("userAvatarService", () => {
     const findUser = await userRepositoryInMemory.findById(userCreate.id);
 
     const userAvatarUpdate = await userAvatarService.execute({
-      id: userCreate.id,
+      id: findUser.id,
       avatarFilename: "teste2.png",
     });
+    // console.log(user);
+    // console.log(userAvatarUpdate);
 
-    console.log(userAvatarUpdate);
+    // expect(userAvatarUpdate.avatar).toBe("teste2.png");
   });
 });

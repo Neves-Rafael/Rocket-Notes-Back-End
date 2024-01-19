@@ -32,7 +32,6 @@ describe("userUpdateService", () => {
       userCreate.id
     );
 
-    console.log(userUpdated);
     await expect(userUpdatedResult.name).toEqual(userUpdated.name);
     await expect(userUpdatedResult.email).toEqual(userUpdated.email);
     await expect(userUpdatedResult.password).toEqual(userUpdated.password);

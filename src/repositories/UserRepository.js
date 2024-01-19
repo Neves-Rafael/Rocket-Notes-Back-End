@@ -57,7 +57,6 @@ class UserRepository {
   async saveAvatar(avatarFilename) {
     const diskStorage = new DiskStorage();
     const avatar = await diskStorage.saveFile(avatarFilename);
-    console.log(avatarFilename);
     return avatar;
   }
 

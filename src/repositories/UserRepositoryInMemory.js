@@ -3,12 +3,16 @@ class UserRepositoryInMemory {
   constructor() {
     this.users = [];
   }
-  async create({ name, email, password }) {
+  async create({ name, email, password, avatar }) {
+    if (!avatar) {
+      avatar = null;
+    }
     const passwordHash = await hash(password, 8);
     const user = {
       id: Math.floor(Math.random() * 1000) + 1,
       email,
       name,
+      avatar,
       password: passwordHash,
     };
 
@@ -32,16 +36,22 @@ class UserRepositoryInMemory {
   }
 
   async updateAvatar({ user_id, user }) {
-    return this.users.findIndex((user) => user.id === user_id);
+    const index = this.users.findIndex((user) => user.id === user.id);
+    if (index !== -1) {
+      this.users[index] = user;
+    }
+    return this.users[index];
   }
 
   async saveAvatar(avatarFilename) {
-    return (this.users.avatar = avatarFilename);
+    return avatarFilename;
   }
 
-  async delete(id) {
-    return this.users.findIndex((user) => user.id === id);
+  async deleteAvatar(id) {
+    const index = this.users.findIndex((user) => user.id === id);
+    if (index !== -1) {
+      this.users.splice(index, 1);
+    }
   }
 }
-
 module.exports = UserRepositoryInMemory;
