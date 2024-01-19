@@ -10,8 +10,6 @@ class SessionCreateService {
   async execute({ email, password }) {
     const user = await this.sessionsRepository.create(email);
 
-    console.log(user);
-
     if (!user) {
       throw new AppError("Incorrect email or password", 401);
     }
