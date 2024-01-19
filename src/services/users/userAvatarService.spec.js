@@ -46,4 +46,23 @@ describe("userAvatarService", () => {
 
     expect(userAvatarUpdate.user.avatar).toBe("teste2.png");
   });
+
+  it("Enviando avatar vazio", async () => {
+    const user = {
+      name: "User Test",
+      email: "user@test.com",
+      password: "123",
+      avatar: "teste.png",
+    };
+
+    const userCreate = await userRepositoryInMemory.create(user);
+    const findUser = await userRepositoryInMemory.findById(userCreate.id);
+
+    const idAvatar = findUser.id;
+    const avatarFilename = undefined;
+
+    await expect(
+      userAvatarService.execute(idAvatar, avatarFilename)
+    ).rejects.toEqual(new AppError("Avatar not found", 404));
+  });
 });

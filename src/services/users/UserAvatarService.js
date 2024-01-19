@@ -11,6 +11,10 @@ class UserAvatarService {
       throw new AppError("Unauthenticated user", 404);
     }
 
+    if (!avatarFilename) {
+      throw new AppError("Avatar not found", 404);
+    }
+
     if (user.avatar) {
       await this.userRepository.deleteAvatar(user.avatar);
     }
