@@ -35,7 +35,7 @@ class UserRepositoryInMemory {
     }
   }
 
-  async updateAvatar({ user_id, user }) {
+  async updateAvatar(user) {
     const index = this.users.findIndex((user) => user.id === user.id);
     if (index !== -1) {
       this.users[index] = user;

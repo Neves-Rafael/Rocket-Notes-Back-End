@@ -37,13 +37,13 @@ describe("userAvatarService", () => {
     const userCreate = await userRepositoryInMemory.create(user);
     const findUser = await userRepositoryInMemory.findById(userCreate.id);
 
-    const userAvatarUpdate = await userAvatarService.execute({
-      id: findUser.id,
-      avatarFilename: "teste2.png",
-    });
-    // console.log(user);
-    // console.log(userAvatarUpdate);
+    const idAvatar = findUser.id;
+    const avatarFilename = "teste2.png";
+    const userAvatarUpdate = await userAvatarService.execute(
+      idAvatar,
+      avatarFilename
+    );
 
-    // expect(userAvatarUpdate.avatar).toBe("teste2.png");
+    expect(userAvatarUpdate.user.avatar).toBe("teste2.png");
   });
 });
