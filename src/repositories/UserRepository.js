@@ -47,23 +47,24 @@ class UserRepository {
     return sendUpdate;
   }
 
-  async updateAvatar({user_id, user}){
-    const updateUserAvatar = await knex("users").update(user).where({id: user_id});
-    console.log(updateUserAvatar)
+  async updateAvatar({ user_id, user }) {
+    const updateUserAvatar = await knex("users")
+      .update(user)
+      .where({ id: user_id });
     return updateUserAvatar;
   }
 
   async saveAvatar(avatarFilename) {
     const diskStorage = new DiskStorage();
     const avatar = await diskStorage.saveFile(avatarFilename);
-    console.log(avatarFilename)
-    return avatar
+    console.log(avatarFilename);
+    return avatar;
   }
 
-  async deleteAvatar(avatarFilename){
+  async deleteAvatar(avatarFilename) {
     const diskStorage = new DiskStorage();
     const avatar = await diskStorage.deleteFile(avatarFilename);
-    return avatar
+    return avatar;
   }
 }
 

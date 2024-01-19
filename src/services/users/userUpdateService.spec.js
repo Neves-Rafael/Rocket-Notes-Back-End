@@ -112,7 +112,7 @@ describe("userUpdateService", () => {
       password: "123",
     };
 
-    const userCreate = await userRepositoryInMemory.create(user);
+    await userRepositoryInMemory.create(user);
 
     await expect(
       userUpdateService.execute({

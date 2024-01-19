@@ -31,8 +31,16 @@ class UserRepositoryInMemory {
     }
   }
 
+  async updateAvatar({ user_id, user }) {
+    return this.users.findIndex((user) => user.id === user_id);
+  }
+
+  async saveAvatar(avatarFilename) {
+    return (this.users.avatar = avatarFilename);
+  }
+
   async delete(id) {
-    this.users = this.users.filter((user) => user.id !== id);
+    return this.users.findIndex((user) => user.id === id);
   }
 }
 
