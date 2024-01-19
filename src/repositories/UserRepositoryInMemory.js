@@ -1,15 +1,18 @@
+const { hash } = require("bcryptjs");
 class UserRepositoryInMemory {
-  users = [];
+  constructor() {
+    this.users = [];
+  }
   async create({ name, email, password }) {
+    const passwordHash = await hash(password, 8);
     const user = {
       id: Math.floor(Math.random() * 1000) + 1,
       email,
       name,
-      password,
+      password: passwordHash,
     };
 
     this.users.push(user);
-
     return user;
   }
 
@@ -21,21 +24,16 @@ class UserRepositoryInMemory {
     return this.users.find((user) => user.id === id);
   }
 
-  async update({ id, name, email, password }) {
-    const userIndex = this.users.findIndex((user) => user.id === id);
-    console.log(userIndex);
-    if (userIndex !== -1) {
-      // Atualize apenas os campos fornecidos
-      if (name) this.users[userIndex].name = name;
-      if (email) this.users[userIndex].email = email;
-      if (password) this.users[userIndex].password = password;
-
-      // Retorne o usuário atualizado
-      return { ...this.users[userIndex] };
+  async update(user, user_id) {
+    const index = this.users.findIndex((user) => user.id === user_id);
+    if (index !== -1 && user) {
+      this.users[index] = { ...this.users[index], ...user };
     }
+  }
 
-    // Se o usuário não for encontrado, retorne null ou lance uma exceção, dependendo do seu caso
-    return null;
+  async delete(id) {
+    this.users = this.users.filter((user) => user.id !== id);
   }
 }
+
 module.exports = UserRepositoryInMemory;

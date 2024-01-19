@@ -29,7 +29,6 @@ class UserUpdateService {
 
     if (password && old_password) {
       const checkOldPassword = await compare(old_password, user.password);
-
       if (!checkOldPassword) {
         throw new AppError("The old Password is not correct");
       }
@@ -38,6 +37,7 @@ class UserUpdateService {
     }
 
     this.userRepository.update({ user, user_id });
+    return user;
   }
 }
 

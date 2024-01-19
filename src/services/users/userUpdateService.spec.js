@@ -12,26 +12,29 @@ describe("userUpdateService", () => {
   });
 
   it("Atualizar usuário", async () => {
-    const initialUser = {
+    const user = {
       name: "User Test",
       email: "user@test.com",
       password: "123",
     };
 
-    const userUpdate = await userRepositoryInMemory.create(initialUser);
+    const userCreate = await userRepositoryInMemory.create(user);
 
-    const updateUserData = {
-      id: userUpdate.id,
-      name: "Update User Test",
-      email: "updateuser@test.com",
+    const userUpdated = await userUpdateService.execute({
+      user_id: userCreate.id,
+      name: "User Test Updated",
+      email: "user@test.com",
+      old_password: "123",
       password: "456",
-    };
+    });
 
-    const updatedUser = await userUpdateService.execute(updateUserData);
-    console.log(updatedUser);
+    const userUpdatedResult = await userRepositoryInMemory.findById(
+      userCreate.id
+    );
 
-    // expect(updatedUser).toHaveProperty("id", createdUser.id);
-    // expect(updatedUser.name).toBe(updateUserData.name);
-    // expect(updatedUser.email).toBe(updateUserData.email);
+    console.log(userUpdated);
+    expect(userUpdatedResult.name).toEqual(userUpdated.name);
+    expect(userUpdatedResult.email).toEqual(userUpdated.email);
+    expect(userUpdatedResult.password).toEqual(userUpdated.password);
   });
 });
