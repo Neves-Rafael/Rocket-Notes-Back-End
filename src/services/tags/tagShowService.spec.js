@@ -24,13 +24,8 @@ describe("TagShowService", () => {
     await expect(showTags).toEqual([tagCreate]);
   });
 
-  it("Buscando por tags", async () => {
-    const tags = {
-      id: Math.floor(Math.random() * 1000) + 1,
-      note_id: Math.floor(Math.random() * 1000) + 1,
-      user_id: Math.floor(Math.random() * 1000) + 1,
-      name: "tag teste",
-    };
+  it("Buscando por tag inexistente", async () => {
+    const tags = {};
 
     const tagCreate = await tagsRepositoryInMemory.create(tags);
     const showTags = await tagShowService.execute(tagCreate.user_id);
