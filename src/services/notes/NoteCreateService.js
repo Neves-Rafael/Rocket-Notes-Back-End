@@ -6,7 +6,7 @@ class NoteCreateService {
 
   async execute({ title, description, tags, links, user_id }) {
     if (!user_id) {
-      throw new Error("User not found");
+      throw new AppError("User not found");
     }
     return await this.notesRepository.create(
       title,
