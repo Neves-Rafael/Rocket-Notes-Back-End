@@ -2,7 +2,7 @@ const NotesRepositoryInMemory = require("../../repositories/NotesRepositoryInMem
 const NoteDeleteService = require("./NoteDeleteService");
 const AppError = require("../../utils/AppError");
 
-describe("NoteCreateService", () => {
+describe("NoteDeleteService", () => {
   let notesRepositoryInMemory = null;
   let noteDeleteService = null;
 
@@ -29,7 +29,8 @@ describe("NoteCreateService", () => {
     );
 
     const id = noteCreate.user_id;
+    console.log(await noteDeleteService.execute(id));
 
-    await expect(noteDeleteService.execute(id)).not.toBe(id);
+    await expect(noteDeleteService.execute(50)).not.toBe(id);
   });
 });

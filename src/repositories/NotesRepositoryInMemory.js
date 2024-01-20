@@ -22,8 +22,12 @@ class NotesRepositoryInMemory {
       this.notes.splice(index, 1);
     }
 
-    console.log(this.notes[0].user_id);
-    return this.notes[0].user_id;
+    console.log(this.notes);
+
+    if (this.notes[0] && this.notes[0].user_id === id) {
+      return this.notes[0].user_id;
+    }
+    return this.notes;
   }
 
   async index({ title, tags, user_id }) {}
