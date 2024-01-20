@@ -21,9 +21,8 @@ class NotesRepositoryInMemory {
     if (index !== -1) {
       this.notes.splice(index, 1);
     }
-    console.log(index);
-    console.log(this.notes);
-    return this.notes.find((note) => note.id === id);
+
+    return this.notes.user_id;
   }
 
   async index({ title, tags, user_id }) {}
