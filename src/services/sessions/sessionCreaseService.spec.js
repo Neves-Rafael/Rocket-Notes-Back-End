@@ -42,4 +42,20 @@ describe("SessionCreateService", () => {
       })
     ).rejects.toEqual(new AppError("Incorrect email or password", 401));
   });
+
+  it("Criação da seção com senha invalida", async () => {
+    const user = {
+      email: "test@gmail.com",
+      password: "123",
+    };
+
+    const createUser = await sessionsRepositoryInMemory.store(user);
+
+    await expect(
+      sessionCreateService.execute({
+        email: createUser.email,
+        password: "456",
+      })
+    ).rejects.toEqual(new AppError("Incorrect email or password", 401));
+  });
 });
