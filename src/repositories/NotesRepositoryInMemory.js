@@ -16,7 +16,14 @@ class NotesRepositoryInMemory {
 
   async show(id) {}
 
-  async delete(id) {}
+  async delete(id) {
+    // const index = this.notes.findIndex((note) => user.id === id);
+    // if (index !== -1) {
+    //   this.notes.splice(index, 1);
+    // }
+    // // console.log(index);
+    // // return index;
+  }
 
   async index({ title, tags, user_id }) {}
 }
