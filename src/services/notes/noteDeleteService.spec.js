@@ -1,6 +1,5 @@
 const NotesRepositoryInMemory = require("../../repositories/NotesRepositoryInMemory");
 const NoteDeleteService = require("./NoteDeleteService");
-const AppError = require("../../utils/AppError");
 
 describe("NoteDeleteService", () => {
   let notesRepositoryInMemory = null;

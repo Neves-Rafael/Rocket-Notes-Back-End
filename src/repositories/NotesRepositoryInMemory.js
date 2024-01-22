@@ -25,7 +25,20 @@ class NotesRepositoryInMemory {
     return checkId;
   }
 
-  async index({ title, tags, user_id }) {}
+  async index(title, tags, user_id) {
+    console.log(title, tags, user_id);
+    const searchNoteById = this.notes.filter(
+      (note) => note.user_id === user_id
+    );
+    console.log(searchNoteById);
+
+    if (tags) {
+    }
+
+    if (title) {
+    }
+    return this.notes;
+  }
 }
 
 module.exports = NotesRepositoryInMemory;

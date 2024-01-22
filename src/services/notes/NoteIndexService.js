@@ -4,6 +4,7 @@ class NoteIndexService {
   }
 
   async execute(title, tags, user_id) {
+    console.log(title, tags, user_id);
     const notes = await this.notesRepository.index(title, tags, user_id);
     return notes;
   }
