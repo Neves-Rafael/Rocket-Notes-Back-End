@@ -4,7 +4,7 @@ class NoteDeleteService {
   }
 
   async execute(id) {
-    this.notesRepository.delete(id);
+    return this.notesRepository.delete(id);
   }
 }
 

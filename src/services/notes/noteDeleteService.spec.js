@@ -28,8 +28,8 @@ describe("NoteDeleteService", () => {
       note.links
     );
 
-    const id = noteCreate.user_id;
-
-    await expect(noteDeleteService.execute(50)).not.toBe(id);
+    const id = await noteCreate.user_id;
+    const noteDelete = await noteDeleteService.execute(id);
+    await expect(noteDelete).toBeFalsy();
   });
 });
