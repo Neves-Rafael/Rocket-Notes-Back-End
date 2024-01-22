@@ -29,7 +29,6 @@ describe("NoteDeleteService", () => {
     );
 
     const id = noteCreate.user_id;
-    console.log(await noteDeleteService.execute(id));
 
     await expect(noteDeleteService.execute(50)).not.toBe(id);
   });
