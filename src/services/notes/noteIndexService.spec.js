@@ -59,10 +59,6 @@ describe("NoteIndexService", () => {
       note3.links
     );
 
-    const notes = await noteIndexService.execute(
-      note1.title,
-      note1.tags,
-      note1.user_id
-    );
+    const notes = await noteIndexService.execute(note1.title, note1.tags, 5);
   });
 });

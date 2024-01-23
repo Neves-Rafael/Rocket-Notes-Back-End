@@ -26,13 +26,19 @@ class NotesRepositoryInMemory {
   }
 
   async index(title, tags, user_id) {
-    console.log(title, tags, user_id);
     const searchNoteById = this.notes.filter(
       (note) => note.user_id === user_id
     );
     console.log(searchNoteById);
-
+    tags = ["tag1", "tag2"];
     if (tags) {
+      const filterTags = tags.map((tag) => {
+        const searchNoteByTag = this.notes.filter((note) => {
+          return note.tags.includes(tag);
+        });
+        console.log(searchNoteByTag);
+      });
+      console.log(filterTags);
     }
 
     if (title) {
