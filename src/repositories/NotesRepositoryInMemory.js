@@ -26,17 +26,19 @@ class NotesRepositoryInMemory {
   }
 
   async index(title, tags, user_id) {
+    //ajustar retorno de uma busca para outra busca
     const searchNoteById = this.notes.filter(
       (note) => note.user_id === user_id
     );
-    console.log(searchNoteById);
-    tags = ["tag1", "tag2"];
+    // console.log(searchNoteById);
+    tags = ["tag1"];
+
     if (tags) {
-      const filterTags = tags.map((tag) => {
-        const searchNoteByTag = this.notes.filter((note) => {
-          return note.tags.includes(tag);
+      const filterTags = await tags.map((tag) => {
+        searchNoteById.filter((tag) => {
+          console.log(tag);
+          return tags.includes(tag);
         });
-        console.log(searchNoteByTag);
       });
       console.log(filterTags);
     }
