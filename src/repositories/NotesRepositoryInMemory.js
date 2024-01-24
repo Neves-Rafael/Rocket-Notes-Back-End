@@ -35,9 +35,8 @@ class NotesRepositoryInMemory {
 
     if (tags) {
       const filterTags = await tags.map((tag) => {
-        searchNoteById.filter((tag) => {
-          console.log(tag);
-          return tags.includes(tag);
+        return searchNoteById.filter((note) => {
+          return note.tags.includes(tag);
         });
       });
       console.log(filterTags);
