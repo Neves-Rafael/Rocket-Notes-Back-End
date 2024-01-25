@@ -32,16 +32,21 @@ class NotesRepositoryInMemory {
     );
     // console.log(searchNoteById); //funciona
 
-    tags = ["tag3"];
+    // tags = ["tag4", "tag1"];
+
     if (tags) {
       const filterTags = await tags.flatMap((tag) => {
-        // console.log(tag); //funciona
         return searchNoteById.filter((note) => {
-          // console.log(note);
           return note.tags.includes(tag);
         });
       });
-      console.log(filterTags);
+
+      //pesquisar depois
+      let uniqueNote = filterTags.filter(
+        (v, i, a) =>
+          a.findIndex((t) => JSON.stringify(t) === JSON.stringify(v)) === i
+      );
+      return uniqueNote;
     }
 
     if (title) {
