@@ -40,24 +40,24 @@ class NotesRepositoryInMemory {
           return note.tags.includes(tag);
         });
       });
-
       //pesquisar depois
       let uniqueNote = filterTags.filter(
-        (v, i, a) =>
-          a.findIndex((t) => JSON.stringify(t) === JSON.stringify(v)) === i
+        (value, index, array) =>
+          array.findIndex(
+            (t) => JSON.stringify(t) === JSON.stringify(value)
+          ) === index
       );
-      return uniqueNote;
     }
 
     if (title) {
-      const filterTitle = await tags.map((title) => {
-        return searchNoteById.filter((note) => {
-          return note.tags.includes(title);
-        });
+      console.log(title);
+
+      const filterTitle = searchNoteById.filter((note) => {
+        return note.title.includes(title);
       });
-      // console.log(filterTitle);
+
+      return filterTitle;
     }
-    return this.notes;
   }
 }
 
