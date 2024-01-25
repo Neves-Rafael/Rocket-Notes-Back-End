@@ -18,6 +18,11 @@ class NotesRepositoryInMemory {
     const searchNoteById = this.notes.filter(
       (note) => note.user_id === user_id
     );
+
+    if (searchNoteById.length === 0) {
+      return;
+    }
+
     return searchNoteById;
   }
 
@@ -38,7 +43,6 @@ class NotesRepositoryInMemory {
     let filterNote;
 
     if (tags && tags.length > 0) {
-      console.log(tags);
       const filterTags = await tags.flatMap((tag) => {
         return searchNoteById.filter((note) => {
           return note.tags.includes(tag);
