@@ -30,7 +30,7 @@ describe("NoteIndexService", () => {
     const note3 = {
       title: "Test3",
       description: "Test",
-      user_id: 5,
+      user_id: 1,
       tags: ["tag5", "tag6"],
       links: ["tag5", "link6"],
     };

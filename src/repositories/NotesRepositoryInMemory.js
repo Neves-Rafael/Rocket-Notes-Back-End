@@ -30,12 +30,14 @@ class NotesRepositoryInMemory {
     const searchNoteById = this.notes.filter(
       (note) => note.user_id === user_id
     );
-    // console.log(searchNoteById);
-    tags = ["tag1"];
+    // console.log(searchNoteById); //funciona
 
+    tags = ["tag3"];
     if (tags) {
-      const filterTags = await tags.map((tag) => {
+      const filterTags = await tags.flatMap((tag) => {
+        // console.log(tag); //funciona
         return searchNoteById.filter((note) => {
+          // console.log(note);
           return note.tags.includes(tag);
         });
       });
@@ -43,6 +45,12 @@ class NotesRepositoryInMemory {
     }
 
     if (title) {
+      const filterTitle = await tags.map((title) => {
+        return searchNoteById.filter((note) => {
+          return note.tags.includes(title);
+        });
+      });
+      // console.log(filterTitle);
     }
     return this.notes;
   }
