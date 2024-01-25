@@ -14,7 +14,12 @@ class NotesRepositoryInMemory {
     return note;
   }
 
-  async show(id) {}
+  async show(user_id) {
+    const searchNoteById = this.notes.filter(
+      (note) => note.user_id === user_id
+    );
+    return searchNoteById;
+  }
 
   async delete(id) {
     const index = this.notes.findIndex((note) => note.user_id === id);
@@ -26,13 +31,9 @@ class NotesRepositoryInMemory {
   }
 
   async index(title, tags, user_id) {
-    //ajustar retorno de uma busca para outra busca
     const searchNoteById = this.notes.filter(
       (note) => note.user_id === user_id
     );
-    // console.log(searchNoteById); //funciona
-
-    // tags = ["tag4", "tag1"];
 
     let filterNote;
 
