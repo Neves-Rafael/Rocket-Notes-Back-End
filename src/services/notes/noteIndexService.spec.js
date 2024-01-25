@@ -61,6 +61,16 @@ describe("NoteIndexService", () => {
 
     await expect(
       noteIndexService.execute("Test1", ["tag1", "tag4"], 5)
-    ).resolves.toContain("Test1", note1.title);
+    ).resolves.toContainEqual(note1);
+
+    await expect(noteIndexService.execute("Test2", [], 1)).resolves.toEqual([]);
+
+    await expect(
+      noteIndexService.execute("", ["tag1", "tag6"], 5)
+    ).resolves.toContainEqual(note1);
+
+    await expect(noteIndexService.execute("", [], 1)).resolves.toContainEqual(
+      note3
+    );
   });
 });
