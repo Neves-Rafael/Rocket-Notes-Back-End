@@ -34,6 +34,8 @@ class NotesRepositoryInMemory {
 
     // tags = ["tag4", "tag1"];
 
+    let filterNote;
+
     if (tags) {
       const filterTags = await tags.flatMap((tag) => {
         return searchNoteById.filter((note) => {
@@ -47,17 +49,21 @@ class NotesRepositoryInMemory {
             (t) => JSON.stringify(t) === JSON.stringify(value)
           ) === index
       );
+      filterNote = uniqueNote;
+    } else {
+      filterNote = searchNoteById;
     }
 
     if (title) {
       console.log(title);
 
-      const filterTitle = searchNoteById.filter((note) => {
+      const filterTitle = await filterNote.filter((note) => {
         return note.title.includes(title);
       });
 
-      return filterTitle;
+      filterNote = filterTitle;
     }
+    return filterNote;
   }
 }
 

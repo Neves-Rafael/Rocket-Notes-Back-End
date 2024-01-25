@@ -59,6 +59,8 @@ describe("NoteIndexService", () => {
       note3.links
     );
 
-    const notes = await noteIndexService.execute(note1.title, note1.tags, 5);
+    await expect(
+      noteIndexService.execute("Test1", ["tag1", "tag4"], 5)
+    ).resolves.toContain("Test1", note1.title);
   });
 });
